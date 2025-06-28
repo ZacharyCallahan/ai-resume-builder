@@ -134,29 +134,10 @@ export default function PreviewModal({
                             </div>
                         </div>
                         <div className="flex items-center space-x-4">
-                            <motion.button
-                                initial={{ opacity: 0, scale: 0.9 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                transition={{ delay: 0.2 }}
-                                onClick={handleDownloadPDF}
-                                disabled={isGeneratingPDF}
-                                className="flex items-center space-x-3 px-6 py-3 bg-white bg-opacity-20 backdrop-blur-sm text-white rounded-xl hover:bg-opacity-30 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 font-medium shadow-lg"
-                            >
-                                {isGeneratingPDF ? (
-                                    <>
-                                        <FaSpinner className="animate-spin" />
-                                        <span>Generating...</span>
-                                    </>
-                                ) : (
-                                    <>
-                                        <FaDownload />
-                                        <span>Download PDF</span>
-                                    </>
-                                )}
-                            </motion.button>
+                            
                             <button
                                 onClick={onClose}
-                                className="text-white hover:bg-white hover:bg-opacity-20 p-3 rounded-full transition-all duration-200"
+                                className="text-white hover:text-black hover:bg-white hover:bg-opacity-20 p-3 rounded-full transition-all duration-200"
                             >
                                 <FaTimes size={20} />
                             </button>

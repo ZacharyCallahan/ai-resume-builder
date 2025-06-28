@@ -324,7 +324,11 @@ export default function TemplateModal({
 
                                                 {/* Template Preview */}
                                                 <div className="aspect-[3/4] bg-gradient-to-br from-gray-50 to-gray-100 border-b relative overflow-hidden">
-                                                    <TemplatePreview templateId={template.id} customization={customization} />
+                                                    <TemplatePreview
+                                                        key={`${template.id}-${customization.accentColor}-${customization.fontFamily}`}
+                                                        templateId={template.id}
+                                                        customization={customization}
+                                                    />
 
                                                     {/* Overlay for better visual */}
                                                     <div className="absolute inset-0 bg-gradient-to-t from-black/5 to-transparent pointer-events-none" />
@@ -658,12 +662,23 @@ function TemplatePreview({ templateId, customization }) {
             <div className="w-full h-full bg-white p-3" style={previewStyle}>
                 <div className="text-center border-b-2 pb-2 mb-2" style={accentStyle}>
                     <div className="font-bold text-sm">John Doe</div>
-                    <div className="text-xs font-medium">Chief Technology Officer</div>
+                    <div className="text-xs font-medium" style={accentStyle}>Chief Technology Officer</div>
                     <div className="text-xs text-gray-600">john@email.com • (555) 123-4567</div>
                 </div>
                 <div className="mb-2">
                     <div className="font-semibold text-xs mb-1" style={accentStyle}>EXECUTIVE SUMMARY</div>
-                    <div className="text-xs text-gray-600">Technology leader with 15+ years...</div>
+                    <div className="text-xs text-gray-600">Technology leader with 15+ years of experience driving digital transformation and leading high-performing teams.</div>
+                </div>
+                <div className="mb-2">
+                    <div className="font-semibold text-xs mb-1" style={accentStyle}>CORE COMPETENCIES</div>
+                    <div className="text-xs text-gray-600">Strategic Planning • Team Leadership • Digital Transformation</div>
+                </div>
+                <div>
+                    <div className="font-semibold text-xs mb-1" style={accentStyle}>EXPERIENCE</div>
+                    <div className="text-xs">
+                        <div className="font-medium">Chief Technology Officer</div>
+                        <div className="text-gray-600">TechCorp Inc • 2020-Present</div>
+                    </div>
                 </div>
             </div>
         );
