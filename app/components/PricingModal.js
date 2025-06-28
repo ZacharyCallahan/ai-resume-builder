@@ -311,7 +311,7 @@ export default function PricingModal({ isOpen, onClose }) {
                                                 <p className="text-sm text-gray-600">{testimonial.role} at {testimonial.company}</p>
                                             </div>
                                         </div>
-                                        <p className="text-gray-700 leading-relaxed italic">"{testimonial.testimonial}"</p>
+                                        <p className="text-gray-700 leading-relaxed italic">&quot;{testimonial.testimonial}&quot;</p>
                                         <div className="flex mt-4">
                                             {[...Array(5)].map((_, i) => (
                                                 <FaStar key={i} className="text-yellow-400" />
