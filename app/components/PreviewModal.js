@@ -564,8 +564,9 @@ export default function PreviewModal({
                         <div className="flex-1 overflow-auto p-1 sm:p-4 lg:p-8">
                             <div className="w-full max-w-sm sm:max-w-lg lg:max-w-4xl mx-auto bg-white shadow-xl rounded-lg overflow-hidden transform scale-90 sm:scale-95 lg:scale-100 origin-top">
                                 <ResumeTemplate
-                                    data={aiGeneratedContent || resumeData}
-                                    selectedTemplate={selectedTemplate}
+                                    data={resumeData}
+                                    aiContent={aiGeneratedContent}
+                                    template={selectedTemplate}
                                     customization={customization}
                                 />
                             </div>
