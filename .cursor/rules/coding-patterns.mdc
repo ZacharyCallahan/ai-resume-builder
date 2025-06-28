@@ -20,10 +20,3 @@ alwaysApply: true
 – Never overwrite my .env file without first asking and confirming
 - Ensure that you correctly using server side and client side components correctly along with using server side actions for
 - when adding debugging information to the website make sure to only show that info on the dev/test environtment not the production
-
-
-
-
-
-
-all api endpoints. Avoid using /api for anything unless absolutley needed if server actions cant do 
