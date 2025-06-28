@@ -37,6 +37,30 @@ export default function TemplateModal({
             name: 'Creative',
             description: 'Eye-catching design for creative fields',
             preview: '/templates/creative-preview.jpg'
+        },
+        {
+            id: 'executive',
+            name: 'Executive',
+            description: 'Professional layout for senior leadership roles',
+            preview: '/templates/executive-preview.jpg'
+        },
+        {
+            id: 'technical',
+            name: 'Technical',
+            description: 'Developer-focused with skills sidebar',
+            preview: '/templates/technical-preview.jpg'
+        },
+        {
+            id: 'academic',
+            name: 'Academic',
+            description: 'Research-oriented academic CV format',
+            preview: '/templates/academic-preview.jpg'
+        },
+        {
+            id: 'compact',
+            name: 'Compact',
+            description: 'Maximizes information in minimal space',
+            preview: '/templates/compact-preview.jpg'
         }
     ];
 
@@ -277,6 +301,179 @@ function TemplatePreview({ templateId, customization }) {
                 <div>
                     <div className="font-semibold text-xs mb-1" style={accentStyle}>SKILLS</div>
                     <div className="text-xs text-gray-600">JavaScript, React, Node.js</div>
+                </div>
+            </div>
+        );
+    }
+
+    if (templateId === 'classic') {
+        return (
+            <div className="w-full h-full bg-white p-3" style={previewStyle}>
+                <div className="text-center mb-2">
+                    <div className="font-bold text-sm">John Doe</div>
+                    <div className="text-xs text-gray-600">john@email.com • (555) 123-4567 • City, State</div>
+                </div>
+                <div className="mb-2">
+                    <div className="text-center font-medium" style={accentStyle}>Software Engineer</div>
+                </div>
+                <div className="mb-2">
+                    <div className="font-semibold text-xs mb-1" style={accentStyle}>PROFESSIONAL EXPERIENCE</div>
+                    <div className="text-xs">
+                        <div className="font-medium">Senior Developer</div>
+                        <div className="text-gray-600">Tech Company, 2020-Present</div>
+                    </div>
+                </div>
+                <div>
+                    <div className="font-semibold text-xs mb-1" style={accentStyle}>SKILLS</div>
+                    <div className="text-xs text-gray-600">JavaScript • React • Node.js</div>
+                </div>
+            </div>
+        );
+    }
+
+    if (templateId === 'creative') {
+        return (
+            <div className="w-full h-full bg-white" style={previewStyle}>
+                <div className="h-8 flex items-center justify-center text-white text-sm font-bold" style={{ backgroundColor: customization.accentColor }}>
+                    John Doe
+                </div>
+                <div className="p-2">
+                    <div className="text-center mb-2">
+                        <div style={accentStyle}>Creative Designer</div>
+                        <div className="text-xs text-gray-600">john@email.com</div>
+                    </div>
+                    <div className="mb-2">
+                        <div className="font-semibold text-xs mb-1" style={accentStyle}>EXPERIENCE</div>
+                        <div className="text-xs">
+                            <div className="font-medium">Senior Designer</div>
+                            <div className="text-gray-600">Creative Agency</div>
+                        </div>
+                    </div>
+                    <div>
+                        <div className="font-semibold text-xs mb-1" style={accentStyle}>SKILLS</div>
+                        <div className="text-xs text-gray-600">Adobe Creative Suite</div>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
+    if (templateId === 'executive') {
+        return (
+            <div className="w-full h-full bg-white p-3" style={previewStyle}>
+                <div className="text-center border-b-2 pb-2 mb-2" style={{ borderColor: customization.accentColor }}>
+                    <div className="font-bold text-sm">John Doe</div>
+                    <div style={accentStyle}>Chief Technology Officer</div>
+                    <div className="text-xs text-gray-600">john@email.com • (555) 123-4567</div>
+                </div>
+                <div className="mb-2">
+                    <div className="font-bold text-xs mb-1" style={accentStyle}>EXECUTIVE SUMMARY</div>
+                    <div className="text-xs text-gray-700">Seasoned technology executive with 15+ years...</div>
+                </div>
+                <div className="grid grid-cols-2 gap-2">
+                    <div>
+                        <div className="font-bold text-xs mb-1" style={accentStyle}>EXPERIENCE</div>
+                        <div className="text-xs">
+                            <div className="font-medium">CTO</div>
+                            <div className="text-gray-600">TechCorp</div>
+                        </div>
+                    </div>
+                    <div>
+                        <div className="font-bold text-xs mb-1" style={accentStyle}>CORE COMPETENCIES</div>
+                        <div className="text-xs text-gray-600">Strategic Planning</div>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
+    if (templateId === 'technical') {
+        return (
+            <div className="w-full h-full bg-white flex" style={previewStyle}>
+                <div className="w-1/3 bg-gray-50 p-2">
+                    <div className="mb-2">
+                        <div className="font-bold text-xs mb-1" style={accentStyle}>CONTACT</div>
+                        <div className="text-xs text-gray-600">
+                            <div>john@email.com</div>
+                            <div>(555) 123-4567</div>
+                        </div>
+                    </div>
+                    <div>
+                        <div className="font-bold text-xs mb-1" style={accentStyle}>TECHNICAL SKILLS</div>
+                        <div className="text-xs text-gray-600">
+                            <div>JavaScript</div>
+                            <div>Python</div>
+                            <div>React</div>
+                        </div>
+                    </div>
+                </div>
+                <div className="w-2/3 p-2">
+                    <div className="mb-1">
+                        <div className="font-bold text-sm">John Doe</div>
+                        <div style={accentStyle}>Full Stack Developer</div>
+                    </div>
+                    <div>
+                        <div className="font-bold text-xs mb-1" style={accentStyle}>EXPERIENCE</div>
+                        <div className="text-xs">
+                            <div className="font-medium">Senior Developer</div>
+                            <div className="text-gray-600">Tech Company</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
+    if (templateId === 'academic') {
+        return (
+            <div className="w-full h-full bg-white p-3" style={previewStyle}>
+                <div className="text-center border-b pb-2 mb-2">
+                    <div className="font-bold text-sm">Dr. John Doe</div>
+                    <div className="text-xs text-gray-600">john@university.edu • (555) 123-4567</div>
+                </div>
+                <div className="text-center mb-2">
+                    <div style={accentStyle}>Associate Professor of Computer Science</div>
+                </div>
+                <div className="mb-2">
+                    <div className="font-bold text-xs text-center mb-1" style={accentStyle}>EDUCATION</div>
+                    <div className="text-xs text-center">
+                        <div className="font-medium">Ph.D. in Computer Science</div>
+                        <div className="text-gray-600">Stanford University, 2015</div>
+                    </div>
+                </div>
+                <div>
+                    <div className="font-bold text-xs text-center mb-1" style={accentStyle}>RESEARCH SKILLS</div>
+                    <div className="text-xs text-center text-gray-600">Machine Learning • Data Analysis</div>
+                </div>
+            </div>
+        );
+    }
+
+    if (templateId === 'compact') {
+        return (
+            <div className="w-full h-full bg-white p-2" style={previewStyle}>
+                <div className="flex justify-between items-start mb-1">
+                    <div>
+                        <div className="font-bold text-sm">John Doe</div>
+                        <div style={accentStyle}>Software Engineer</div>
+                    </div>
+                    <div className="text-xs text-gray-600 text-right">
+                        <div>john@email.com</div>
+                        <div>(555) 123-4567</div>
+                    </div>
+                </div>
+                <div className="w-full h-px mb-2" style={{ backgroundColor: customization.accentColor }}></div>
+                <div className="grid grid-cols-3 gap-2 text-xs">
+                    <div>
+                        <div className="font-bold mb-1" style={accentStyle}>SKILLS</div>
+                        <div className="text-gray-600">JavaScript</div>
+                        <div className="text-gray-600">React</div>
+                    </div>
+                    <div className="col-span-2">
+                        <div className="font-bold mb-1" style={accentStyle}>EXPERIENCE</div>
+                        <div className="font-medium">Senior Developer</div>
+                        <div className="text-gray-600">Tech Company</div>
+                    </div>
                 </div>
             </div>
         );

@@ -25,7 +25,6 @@ export default function Home() {
     workExperience: [],
     education: [],
     skills: [],
-    certifications: [],
     existingResume: '',
     customInstructions: ''
   });
@@ -35,7 +34,7 @@ export default function Home() {
   const [customization, setCustomization] = useState({
     accentColor: '#3B82F6',
     fontFamily: 'Inter',
-    sectionOrder: ['summary', 'experience', 'education', 'skills', 'certifications']
+    sectionOrder: ['summary', 'experience', 'education', 'skills']
   });
 
   const openModal = (modalName) => {
@@ -182,6 +181,7 @@ export default function Home() {
             aiGeneratedContent={aiGeneratedContent}
             selectedTemplate={selectedTemplate}
             customization={customization}
+            setCustomization={setCustomization}
           />
         )}
 
