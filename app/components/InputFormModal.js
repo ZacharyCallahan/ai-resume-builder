@@ -177,7 +177,7 @@ export default function InputFormModal({ isOpen, onClose, resumeData, setResumeD
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 flex items-center justify-center z-50 p-4"
+            className="fixed inset-0 flex items-center justify-center z-50 p-2 sm:p-4"
             style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}
             onClick={(e) => e.target === e.currentTarget && onClose()}
         >
@@ -186,16 +186,16 @@ export default function InputFormModal({ isOpen, onClose, resumeData, setResumeD
                 animate={{ scale: 1, opacity: 1, y: 0 }}
                 exit={{ scale: 0.95, opacity: 0, y: 20 }}
                 transition={{ type: "spring", duration: 0.5 }}
-                className="bg-white rounded-2xl shadow-2xl w-full max-w-5xl max-h-[95vh] overflow-hidden"
+                className="bg-white rounded-xl sm:rounded-2xl shadow-2xl w-full max-w-sm sm:max-w-md md:max-w-2xl lg:max-w-4xl xl:max-w-5xl max-h-[98vh] sm:max-h-[95vh] overflow-hidden"
             >
                 {/* Header with Gradient */}
-                <div className="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 text-white p-6">
+                <div className="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 text-white p-3 sm:p-4 lg:p-6">
                     <div className="flex justify-between items-center">
                         <div>
                             <motion.h2
                                 initial={{ opacity: 0, x: -20 }}
                                 animate={{ opacity: 1, x: 0 }}
-                                className="text-2xl font-bold"
+                                className="text-lg sm:text-xl lg:text-2xl font-bold"
                             >
                                 Build Your Resume
                             </motion.h2>
@@ -203,7 +203,7 @@ export default function InputFormModal({ isOpen, onClose, resumeData, setResumeD
                                 initial={{ opacity: 0, x: -20 }}
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ delay: 0.1 }}
-                                className="text-blue-100 mt-1 text-sm"
+                                className="text-blue-100 mt-1 text-xs sm:text-sm"
                             >
                                 Step {currentStep} of {totalSteps}: {stepIcons[currentStep - 1].label}
                             </motion.p>
@@ -212,52 +212,95 @@ export default function InputFormModal({ isOpen, onClose, resumeData, setResumeD
                             onClick={onClose}
                             className="text-white hover:bg-white hover:bg-opacity-20 p-2 rounded-full transition-all duration-200"
                         >
-                            <FaTimes size={20} />
+                            <FaTimes size={16} className="sm:w-5 sm:h-5" />
                         </button>
                     </div>
 
-                    {/* Enhanced Progress Steps */}
-                    <div className="mt-6">
-                        <div className="flex justify-between items-center">
-                            {stepIcons.map((step, index) => {
-                                const stepNumber = index + 1;
-                                const isActive = stepNumber === currentStep;
-                                const isCompleted = stepNumber < currentStep;
-                                const Icon = step.icon;
+                    {/* Enhanced Progress Steps - Responsive */}
+                    <div className="mt-4 sm:mt-6">
+                        {/* Mobile Progress Steps - Vertical */}
+                        <div className="block sm:hidden">
+                            <div className="flex items-center justify-between mb-4">
+                                {stepIcons.map((step, index) => {
+                                    const stepNumber = index + 1;
+                                    const isActive = stepNumber === currentStep;
+                                    const isCompleted = stepNumber < currentStep;
+                                    const Icon = step.icon;
 
-                                return (
-                                    <motion.div
-                                        key={stepNumber}
-                                        className="flex flex-col items-center"
-                                        initial={{ opacity: 0, y: 10 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        transition={{ delay: index * 0.1 }}
-                                    >
-                                        <div className={`
-                                            w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300
-                                            ${isActive ? 'bg-white text-blue-600 shadow-lg scale-110' :
-                                                isCompleted ? 'bg-green-500 text-white' :
-                                                    'bg-white bg-opacity-20 text-white'}
-                                        `}>
-                                            {isCompleted ? <FaCheckCircle /> : <Icon />}
-                                        </div>
-                                        <span className={`text-xs mt-2 font-medium ${isActive ? 'text-white' : 'text-blue-200'}`}>
-                                            {step.label}
-                                        </span>
-                                        {index < stepIcons.length - 1 && (
-                                            <div className={`absolute top-6 left-1/2 w-24 h-0.5 transform translate-x-6 
-                                                ${isCompleted ? 'bg-green-400' : 'bg-white bg-opacity-30'}`}
-                                            />
-                                        )}
-                                    </motion.div>
-                                );
-                            })}
+                                    return (
+                                        <motion.div
+                                            key={stepNumber}
+                                            className="flex flex-col items-center relative"
+                                            initial={{ opacity: 0, y: 10 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            transition={{ delay: index * 0.1 }}
+                                        >
+                                            <div className={`
+                                                w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 text-xs
+                                                ${isActive ? 'bg-white text-blue-600 shadow-lg scale-110' :
+                                                    isCompleted ? 'bg-green-500 text-white' :
+                                                        'bg-white bg-opacity-20 text-white'}
+                                            `}>
+                                                {isCompleted ? <FaCheckCircle /> : <Icon />}
+                                            </div>
+                                            <span className={`text-xs mt-1 font-medium text-center ${isActive ? 'text-white' : 'text-blue-200'}`}>
+                                                {step.label.split(' ')[0]}
+                                            </span>
+                                            {index < stepIcons.length - 1 && (
+                                                <div className={`absolute top-4 left-8 w-6 h-0.5 
+                                                    ${isCompleted ? 'bg-green-400' : 'bg-white bg-opacity-30'}`}
+                                                />
+                                            )}
+                                        </motion.div>
+                                    );
+                                })}
+                            </div>
+                        </div>
+
+                        {/* Desktop Progress Steps - Horizontal */}
+                        <div className="hidden sm:block">
+                            <div className="flex justify-between items-center relative">
+                                {stepIcons.map((step, index) => {
+                                    const stepNumber = index + 1;
+                                    const isActive = stepNumber === currentStep;
+                                    const isCompleted = stepNumber < currentStep;
+                                    const Icon = step.icon;
+
+                                    return (
+                                        <motion.div
+                                            key={stepNumber}
+                                            className="flex flex-col items-center relative z-10"
+                                            initial={{ opacity: 0, y: 10 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            transition={{ delay: index * 0.1 }}
+                                        >
+                                            <div className={`
+                                                w-10 sm:w-12 h-10 sm:h-12 rounded-full flex items-center justify-center transition-all duration-300
+                                                ${isActive ? 'bg-white text-blue-600 shadow-lg scale-110' :
+                                                    isCompleted ? 'bg-green-500 text-white' :
+                                                        'bg-white bg-opacity-20 text-white'}
+                                            `}>
+                                                {isCompleted ? <FaCheckCircle /> : <Icon />}
+                                            </div>
+                                            <span className={`text-xs mt-2 font-medium text-center ${isActive ? 'text-white' : 'text-blue-200'}`}>
+                                                {step.label}
+                                            </span>
+                                        </motion.div>
+                                    );
+                                })}
+                                {/* Connection lines */}
+                                <div className="absolute top-5 sm:top-6 left-0 right-0 h-0.5 bg-white bg-opacity-30 -z-10"></div>
+                                <div
+                                    className="absolute top-5 sm:top-6 left-0 h-0.5 bg-green-400 transition-all duration-500 -z-10"
+                                    style={{ width: `${((currentStep - 1) / (totalSteps - 1)) * 100}%` }}
+                                ></div>
+                            </div>
                         </div>
 
                         {/* Progress Bar */}
-                        <div className="mt-6 w-full bg-white bg-opacity-20 rounded-full h-2">
+                        <div className="mt-4 sm:mt-6 w-full bg-white bg-opacity-20 rounded-full h-1 sm:h-2">
                             <motion.div
-                                className="bg-white h-2 rounded-full"
+                                className="bg-white h-1 sm:h-2 rounded-full"
                                 initial={{ width: 0 }}
                                 animate={{ width: `${(currentStep / totalSteps) * 100}%` }}
                                 transition={{ duration: 0.5, ease: "easeInOut" }}
@@ -267,7 +310,7 @@ export default function InputFormModal({ isOpen, onClose, resumeData, setResumeD
                 </div>
 
                 {/* Content Area */}
-                <div className="flex-1 overflow-y-auto max-h-[60vh] bg-gradient-to-br from-gray-50 to-white">
+                <div className="flex-1 overflow-y-auto max-h-[50vh] sm:max-h-[55vh] lg:max-h-[60vh] bg-gradient-to-br from-gray-50 to-white">
                     <AnimatePresence mode="wait">
                         <motion.div
                             key={currentStep}
@@ -275,7 +318,7 @@ export default function InputFormModal({ isOpen, onClose, resumeData, setResumeD
                             animate={{ opacity: 1, x: 0 }}
                             exit={{ opacity: 0, x: 0 }}
                             transition={{ duration: 0.3 }}
-                            className="p-6"
+                            className="p-3 sm:p-4 lg:p-6"
                         >
                             {currentStep === 1 && (
                                 <PersonalInfoStep
@@ -320,26 +363,26 @@ export default function InputFormModal({ isOpen, onClose, resumeData, setResumeD
                     </AnimatePresence>
                 </div>
 
-                {/* Enhanced Footer */}
-                <div className="border-t border-gray-200 bg-white px-8 py-6">
-                    <div className="flex justify-between items-center">
+                {/* Enhanced Footer - Responsive */}
+                <div className="border-t border-gray-200 bg-white px-3 sm:px-6 lg:px-8 py-3 sm:py-4 lg:py-6">
+                    <div className="flex flex-col sm:flex-row justify-between items-center space-y-3 sm:space-y-0">
                         <button
                             onClick={handlePrevious}
                             disabled={currentStep === 1}
-                            className="px-6 py-3 border border-gray-300 text-gray-700 rounded-xl hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 font-medium"
+                            className="w-full sm:w-auto px-4 sm:px-6 py-2 sm:py-3 border border-gray-300 text-gray-700 rounded-lg sm:rounded-xl hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 font-medium text-sm sm:text-base"
                         >
                             ← Previous
                         </button>
 
-                        <div className="text-center">
-                            <span className="text-sm text-gray-500">
+                        <div className="text-center order-first sm:order-none">
+                            <span className="text-xs sm:text-sm text-gray-500">
                                 Step {currentStep} of {totalSteps}
                             </span>
                         </div>
 
                         <button
                             onClick={handleNext}
-                            className="px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl hover:from-blue-700 hover:to-purple-700 transition-all duration-200 font-medium shadow-lg hover:shadow-xl transform hover:scale-105"
+                            className="w-full sm:w-auto px-6 sm:px-8 py-2 sm:py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg sm:rounded-xl hover:from-blue-700 hover:to-purple-700 transition-all duration-200 font-medium shadow-lg hover:shadow-xl transform hover:scale-105 text-sm sm:text-base"
                         >
                             {currentStep === totalSteps ? 'Continue to Templates →' : 'Next →'}
                         </button>
@@ -355,14 +398,14 @@ function PersonalInfoStep({ personalInfo, updatePersonalInfo, targetJobTitle, se
         <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="space-y-8"
+            className="space-y-6 sm:space-y-8"
         >
             <div className="text-center">
                 <motion.h3
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.1 }}
-                    className="text-xl font-bold text-gray-900 mb-2"
+                    className="text-lg sm:text-xl font-bold text-gray-900 mb-2"
                 >
                     Let&apos;s Start With You
                 </motion.h3>
@@ -370,7 +413,7 @@ function PersonalInfoStep({ personalInfo, updatePersonalInfo, targetJobTitle, se
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.2 }}
-                    className="text-gray-600 text-sm"
+                    className="text-gray-600 text-xs sm:text-sm"
                 >
                     Tell us about yourself so we can create your perfect resume
                 </motion.p>
@@ -380,9 +423,9 @@ function PersonalInfoStep({ personalInfo, updatePersonalInfo, targetJobTitle, se
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
-                className="bg-white rounded-xl shadow-lg p-6 border border-gray-200"
+                className="bg-white rounded-lg sm:rounded-xl shadow-lg p-4 sm:p-6 border border-gray-200"
             >
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                     <div className="space-y-2">
                         <label className="block text-sm font-semibold text-gray-700">
                             Full Name *
@@ -391,8 +434,21 @@ function PersonalInfoStep({ personalInfo, updatePersonalInfo, targetJobTitle, se
                             type="text"
                             value={personalInfo.fullName}
                             onChange={(e) => updatePersonalInfo('fullName', e.target.value)}
-                            className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                            className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-lg sm:rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-sm sm:text-base"
                             placeholder="John Doe"
+                        />
+                    </div>
+
+                    <div className="space-y-2 sm:col-span-2">
+                        <label className="block text-sm font-semibold text-gray-700">
+                            Target Job Title *
+                        </label>
+                        <input
+                            type="text"
+                            value={targetJobTitle}
+                            onChange={(e) => setTargetJobTitle(e.target.value)}
+                            className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-lg sm:rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-sm sm:text-base"
+                            placeholder="Software Engineer"
                         />
                     </div>
 
@@ -404,7 +460,7 @@ function PersonalInfoStep({ personalInfo, updatePersonalInfo, targetJobTitle, se
                             type="email"
                             value={personalInfo.email}
                             onChange={(e) => updatePersonalInfo('email', e.target.value)}
-                            className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                            className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-lg sm:rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-sm sm:text-base"
                             placeholder="john@example.com"
                         />
                     </div>
@@ -417,12 +473,12 @@ function PersonalInfoStep({ personalInfo, updatePersonalInfo, targetJobTitle, se
                             type="tel"
                             value={personalInfo.phone}
                             onChange={(e) => updatePersonalInfo('phone', e.target.value)}
-                            className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                            className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-lg sm:rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-sm sm:text-base"
                             placeholder="(555) 123-4567"
                         />
                     </div>
 
-                    <div className="space-y-2">
+                    <div className="space-y-2 sm:col-span-2">
                         <label className="block text-sm font-semibold text-gray-700">
                             Location
                         </label>
@@ -430,21 +486,21 @@ function PersonalInfoStep({ personalInfo, updatePersonalInfo, targetJobTitle, se
                             type="text"
                             value={personalInfo.location}
                             onChange={(e) => updatePersonalInfo('location', e.target.value)}
-                            className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
-                            placeholder="New York, NY"
+                            className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-lg sm:rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-sm sm:text-base"
+                            placeholder="San Francisco, CA"
                         />
                     </div>
 
                     <div className="space-y-2">
                         <label className="block text-sm font-semibold text-gray-700">
-                            LinkedIn
+                            LinkedIn URL
                         </label>
                         <input
                             type="url"
                             value={personalInfo.linkedIn}
                             onChange={(e) => updatePersonalInfo('linkedIn', e.target.value)}
-                            className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
-                            placeholder="https://linkedin.com/in/johndoe"
+                            className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-lg sm:rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-sm sm:text-base"
+                            placeholder="linkedin.com/in/johndoe"
                         />
                     </div>
 
@@ -456,32 +512,11 @@ function PersonalInfoStep({ personalInfo, updatePersonalInfo, targetJobTitle, se
                             type="url"
                             value={personalInfo.website}
                             onChange={(e) => updatePersonalInfo('website', e.target.value)}
-                            className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
-                            placeholder="https://johndoe.com"
+                            className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-lg sm:rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-sm sm:text-base"
+                            placeholder="johndoe.com"
                         />
                     </div>
                 </div>
-            </motion.div>
-
-            <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4 }}
-                className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl p-6 border border-blue-200"
-            >
-                <label className="block text-sm font-semibold text-gray-700 mb-3">
-                    Target Job Title *
-                </label>
-                <input
-                    type="text"
-                    value={targetJobTitle}
-                    onChange={(e) => setTargetJobTitle(e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-lg font-medium"
-                    placeholder="Software Engineer"
-                />
-                <p className="text-sm text-gray-600 mt-2">
-                    This helps our AI tailor your resume for the specific role  targeting
-                </p>
             </motion.div>
         </motion.div>
     );

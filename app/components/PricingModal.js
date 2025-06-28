@@ -125,7 +125,7 @@ export default function PricingModal({ isOpen, onClose }) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 flex items-center justify-center z-50 p-4 overflow-hidden"
+            className="fixed inset-0 flex items-center justify-center z-50 p-2 sm:p-4 overflow-hidden"
             style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}
             onClick={(e) => e.target === e.currentTarget && onClose()}
         >
@@ -134,16 +134,16 @@ export default function PricingModal({ isOpen, onClose }) {
                 animate={{ scale: 1, opacity: 1, y: 0 }}
                 exit={{ scale: 0.95, opacity: 0, y: 20 }}
                 transition={{ type: "spring", duration: 0.5 }}
-                className="bg-white rounded-3xl shadow-2xl w-full max-w-6xl max-h-[95vh] overflow-hidden"
+                className="bg-white rounded-xl sm:rounded-2xl lg:rounded-3xl shadow-2xl w-full max-w-sm sm:max-w-md md:max-w-4xl lg:max-w-5xl xl:max-w-6xl max-h-[98vh] sm:max-h-[95vh] overflow-hidden"
             >
                 {/* Header with Gradient */}
-                <div className="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 text-white p-6">
+                <div className="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 text-white p-3 sm:p-4 lg:p-6">
                     <div className="flex justify-between items-center">
                         <div>
                             <motion.h2
                                 initial={{ opacity: 0, x: -20 }}
                                 animate={{ opacity: 1, x: 0 }}
-                                className="text-2xl font-bold mb-1"
+                                className="text-lg sm:text-xl lg:text-2xl font-bold mb-1"
                             >
                                 Choose Your Plan
                             </motion.h2>
@@ -151,7 +151,7 @@ export default function PricingModal({ isOpen, onClose }) {
                                 initial={{ opacity: 0, x: -20 }}
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ delay: 0.1 }}
-                                className="text-blue-100 text-sm"
+                                className="text-blue-100 text-xs sm:text-sm"
                             >
                                 Unlock the full power of AI resume building
                             </motion.p>
@@ -160,16 +160,16 @@ export default function PricingModal({ isOpen, onClose }) {
                             onClick={onClose}
                             className="text-white hover:bg-white hover:bg-opacity-20 p-2 rounded-full transition-all duration-200"
                         >
-                            <FaTimes size={20} />
+                            <FaTimes size={16} className="sm:w-5 sm:h-5" />
                         </button>
                     </div>
 
-                    {/* Trust Indicators */}
+                    {/* Trust Indicators - Responsive */}
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.2 }}
-                        className="mt-4 flex flex-wrap items-center justify-center gap-6 text-blue-100"
+                        className="mt-3 sm:mt-4 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6 text-blue-100"
                     >
                         <div className="flex items-center space-x-2">
                             <FaShieldAlt className="text-green-400" />
@@ -187,10 +187,10 @@ export default function PricingModal({ isOpen, onClose }) {
                 </div>
 
                 {/* Content Area */}
-                <div className="overflow-y-auto max-h-[70vh] bg-gradient-to-br from-gray-50 to-white">
-                    {/* Pricing Cards */}
-                    <div className="p-6">
-                        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div className="overflow-y-auto max-h-[50vh] sm:max-h-[60vh] lg:max-h-[70vh] bg-gradient-to-br from-gray-50 to-white">
+                    {/* Pricing Cards - Responsive Grid */}
+                    <div className="p-3 sm:p-4 lg:p-6">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-6">
                             {plans.map((plan, index) => {
                                 const Icon = plan.icon;
                                 const isPopular = plan.popular;
@@ -201,41 +201,41 @@ export default function PricingModal({ isOpen, onClose }) {
                                         initial={{ opacity: 0, y: 20 }}
                                         animate={{ opacity: 1, y: 0 }}
                                         transition={{ delay: index * 0.1 + 0.3 }}
-                                        className={`relative bg-white rounded-2xl border-2 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden ${isPopular ? 'border-blue-500 ring-2 ring-blue-100 scale-105' : 'border-gray-200'
+                                        className={`relative bg-white rounded-xl sm:rounded-2xl border-2 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden ${isPopular ? 'border-blue-500 ring-2 ring-blue-100 scale-100 sm:scale-105' : 'border-gray-200'
                                             }`}
                                     >
                                         {/* Popular Badge */}
                                         {isPopular && (
                                             <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
-                                                <div className="bg-gradient-to-r from-orange-400 to-orange-500 text-white text-xs font-bold px-4 py-1 rounded-full shadow-lg">
+                                                <div className="bg-gradient-to-r from-orange-400 to-orange-500 text-white text-xs font-bold px-3 sm:px-4 py-1 rounded-full shadow-lg">
                                                     Most Popular
                                                 </div>
                                             </div>
                                         )}
 
-                                        <div className="p-5">
+                                        <div className="p-3 sm:p-4 lg:p-5">
                                             {/* Plan Header */}
-                                            <div className="text-center mb-4">
-                                                <div className={`w-12 h-12 mx-auto mb-3 rounded-full flex items-center justify-center ${plan.color === 'blue' ? 'bg-blue-100 text-blue-600' :
+                                            <div className="text-center mb-3 sm:mb-4">
+                                                <div className={`w-10 h-10 sm:w-12 sm:h-12 mx-auto mb-2 sm:mb-3 rounded-full flex items-center justify-center ${plan.color === 'blue' ? 'bg-blue-100 text-blue-600' :
                                                     plan.color === 'purple' ? 'bg-purple-100 text-purple-600' :
                                                         'bg-gray-100 text-gray-600'
                                                     }`}>
-                                                    <Icon className="text-lg" />
+                                                    <Icon className="text-sm sm:text-lg" />
                                                 </div>
-                                                <h3 className="text-lg font-bold text-gray-900">{plan.name}</h3>
+                                                <h3 className="text-base sm:text-lg font-bold text-gray-900">{plan.name}</h3>
                                                 <p className="text-xs text-gray-600 mt-1">{plan.description}</p>
                                             </div>
 
                                             {/* Pricing */}
-                                            <div className="text-center mb-4">
+                                            <div className="text-center mb-3 sm:mb-4">
                                                 <div className="flex items-baseline justify-center">
-                                                    <span className="text-2xl font-bold text-gray-900">{plan.price}</span>
-                                                    <span className="text-sm text-gray-600 ml-1">/{plan.period}</span>
+                                                    <span className="text-xl sm:text-2xl font-bold text-gray-900">{plan.price}</span>
+                                                    <span className="text-xs sm:text-sm text-gray-600 ml-1">/{plan.period}</span>
                                                 </div>
                                             </div>
 
                                             {/* Features */}
-                                            <div className="space-y-2 mb-4">
+                                            <div className="space-y-1 sm:space-y-2 mb-3 sm:mb-4">
                                                 {plan.features.map((feature, featureIndex) => (
                                                     <div key={featureIndex} className="flex items-center text-xs">
                                                         <FaCheck className="text-green-500 mr-2 flex-shrink-0" />
@@ -246,7 +246,7 @@ export default function PricingModal({ isOpen, onClose }) {
 
                                             {/* Limitations */}
                                             {plan.limitations.length > 0 && (
-                                                <div className="space-y-2 mb-4 pb-4 border-b border-gray-100">
+                                                <div className="space-y-1 sm:space-y-2 mb-3 sm:mb-4 pb-3 sm:pb-4 border-b border-gray-100">
                                                     {plan.limitations.map((limitation, limitationIndex) => (
                                                         <div key={limitationIndex} className="flex items-center text-xs">
                                                             <span className="text-red-500 mr-2">✕</span>
@@ -258,7 +258,7 @@ export default function PricingModal({ isOpen, onClose }) {
 
                                             {/* CTA Button */}
                                             <button
-                                                className={`w-full py-2 px-4 rounded-xl font-medium transition-all duration-200 ${isPopular
+                                                className={`w-full py-2 sm:py-3 px-3 sm:px-4 rounded-lg sm:rounded-xl font-medium transition-all duration-200 text-sm sm:text-base ${isPopular
                                                     ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:from-blue-700 hover:to-purple-700 shadow-lg hover:shadow-xl transform hover:scale-105'
                                                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                                                     }`}
@@ -272,35 +272,35 @@ export default function PricingModal({ isOpen, onClose }) {
                         </div>
                     </div>
 
-                    {/* Testimonials Section */}
-                    <div className="px-6 py-4 bg-white">
+                    {/* Testimonials Section - Responsive */}
+                    <div className="px-3 sm:px-4 lg:px-6 py-3 sm:py-4 bg-white">
                         <motion.h3
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.6 }}
-                            className="text-lg font-bold text-center text-gray-900 mb-4"
+                            className="text-base sm:text-lg font-bold text-center text-gray-900 mb-3 sm:mb-4"
                         >
                             What Our Users Say
                         </motion.h3>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
                             {testimonials.map((testimonial, index) => (
                                 <motion.div
                                     key={index}
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: 0.7 + index * 0.1 }}
-                                    className="bg-gray-50 rounded-xl p-4 border border-gray-100"
+                                    className="bg-gray-50 rounded-lg sm:rounded-xl p-3 sm:p-4 border border-gray-100"
                                 >
                                     <div className="flex items-center mb-2">
-                                        <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center text-white text-xs font-bold mr-3">
+                                        <div className="w-6 h-6 sm:w-8 sm:h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center text-white text-xs font-bold mr-2 sm:mr-3">
                                             {testimonial.avatar}
                                         </div>
                                         <div>
-                                            <div className="font-semibold text-sm text-gray-900">{testimonial.name}</div>
+                                            <div className="font-semibold text-xs sm:text-sm text-gray-900">{testimonial.name}</div>
                                             <div className="text-xs text-gray-600">{testimonial.role} at {testimonial.company}</div>
                                         </div>
                                     </div>
-                                    <p className="text-xs text-gray-700 italic">&quot;{testimonial.testimonial}&quot;</p>
+                                    <p className="text-xs text-gray-700 italic leading-relaxed">&quot;{testimonial.testimonial}&quot;</p>
                                     <div className="flex text-yellow-400 mt-2">
                                         {[...Array(5)].map((_, i) => (
                                             <FaStar key={i} className="text-xs" />
@@ -311,36 +311,36 @@ export default function PricingModal({ isOpen, onClose }) {
                         </div>
                     </div>
 
-                    {/* FAQ Section */}
-                    <div className="px-6 py-4 bg-gradient-to-r from-gray-50 to-white">
+                    {/* FAQ Section - Responsive */}
+                    <div className="px-3 sm:px-4 lg:px-6 py-3 sm:py-4 bg-gradient-to-r from-gray-50 to-white">
                         <motion.h3
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 1.0 }}
-                            className="text-lg font-bold text-center text-gray-900 mb-4"
+                            className="text-base sm:text-lg font-bold text-center text-gray-900 mb-3 sm:mb-4"
                         >
                             Frequently Asked Questions
                         </motion.h3>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl mx-auto">
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4 max-w-4xl mx-auto">
                             {faqs.map((faq, index) => (
                                 <motion.div
                                     key={index}
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: 1.1 + index * 0.1 }}
-                                    className="bg-white rounded-xl p-4 shadow-sm border border-gray-100"
+                                    className="bg-white rounded-lg sm:rounded-xl p-3 sm:p-4 shadow-sm border border-gray-100"
                                 >
-                                    <h4 className="font-semibold text-sm text-gray-900 mb-2">{faq.question}</h4>
+                                    <h4 className="font-semibold text-xs sm:text-sm text-gray-900 mb-1 sm:mb-2">{faq.question}</h4>
                                     <p className="text-xs text-gray-600 leading-relaxed">{faq.answer}</p>
                                 </motion.div>
                             ))}
                         </div>
                     </div>
 
-                    {/* Trust & Security Footer */}
-                    <div className="px-6 py-4 bg-gradient-to-r from-blue-50 to-purple-50 border-t">
+                    {/* Trust & Security Footer - Responsive */}
+                    <div className="px-3 sm:px-4 lg:px-6 py-3 sm:py-4 bg-gradient-to-r from-blue-50 to-purple-50 border-t">
                         <div className="text-center">
-                            <div className="flex justify-center items-center space-x-6 text-gray-600 text-xs">
+                            <div className="flex flex-col sm:flex-row justify-center items-center space-y-2 sm:space-y-0 sm:space-x-6 text-gray-600 text-xs">
                                 <span className="flex items-center space-x-2">
                                     <FaShieldAlt className="text-green-500" />
                                     <span>Secure payment processing</span>
