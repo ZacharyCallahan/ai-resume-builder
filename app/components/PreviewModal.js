@@ -560,9 +560,9 @@ export default function PreviewModal({
                             </button>
                         </div>
 
-                        {/* Resume Preview */}
-                        <div className="flex-1 overflow-auto p-2 sm:p-4 lg:p-8">
-                            <div className="max-w-4xl mx-auto bg-white shadow-xl rounded-lg overflow-hidden">
+                        {/* Resume Preview - Mobile Optimized */}
+                        <div className="flex-1 overflow-auto p-1 sm:p-4 lg:p-8">
+                            <div className="w-full max-w-sm sm:max-w-lg lg:max-w-4xl mx-auto bg-white shadow-xl rounded-lg overflow-hidden transform scale-90 sm:scale-95 lg:scale-100 origin-top">
                                 <ResumeTemplate
                                     data={aiGeneratedContent || resumeData}
                                     selectedTemplate={selectedTemplate}

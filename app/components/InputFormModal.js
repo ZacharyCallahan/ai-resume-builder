@@ -1,7 +1,7 @@
 'use client';
 
 import { AnimatePresence, motion } from 'framer-motion';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { FaBriefcase, FaCheckCircle, FaGraduationCap, FaPlus, FaRobot, FaSpinner, FaTimes, FaTrash, FaUser } from 'react-icons/fa';
 import { generateResumeContent } from '../actions/ai-actions';
 
@@ -15,6 +15,7 @@ const stepIcons = [
 export default function InputFormModal({ isOpen, onClose, resumeData, setResumeData, aiGeneratedContent, setAiGeneratedContent, onNext }) {
     const [currentStep, setCurrentStep] = useState(1);
     const [isGenerating, setIsGenerating] = useState(false);
+    const directionRef = useRef(1); // 1 for forward, -1 for backward
     const totalSteps = 4;
 
     const updatePersonalInfo = (field, value) => {
@@ -158,6 +159,7 @@ export default function InputFormModal({ isOpen, onClose, resumeData, setResumeD
 
     const handleNext = () => {
         if (currentStep < totalSteps) {
+            directionRef.current = 1; // Going forward
             setCurrentStep(currentStep + 1);
         } else {
             onNext();
@@ -166,6 +168,7 @@ export default function InputFormModal({ isOpen, onClose, resumeData, setResumeD
 
     const handlePrevious = () => {
         if (currentStep > 1) {
+            directionRef.current = -1; // Going backward
             setCurrentStep(currentStep - 1);
         }
     };
@@ -239,18 +242,13 @@ export default function InputFormModal({ isOpen, onClose, resumeData, setResumeD
                                                 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 text-xs
                                                 ${isActive ? 'bg-white text-blue-600 shadow-lg scale-110' :
                                                     isCompleted ? 'bg-green-500 text-white' :
-                                                        'bg-white bg-opacity-20 text-white'}
+                                                        'bg-white bg-opacity-20 text-gray-400'}
                                             `}>
                                                 {isCompleted ? <FaCheckCircle /> : <Icon />}
                                             </div>
                                             <span className={`text-xs mt-1 font-medium text-center ${isActive ? 'text-white' : 'text-blue-200'}`}>
                                                 {step.label.split(' ')[0]}
                                             </span>
-                                            {index < stepIcons.length - 1 && (
-                                                <div className={`absolute top-4 left-8 w-6 h-0.5 
-                                                    ${isCompleted ? 'bg-green-400' : 'bg-white bg-opacity-30'}`}
-                                                />
-                                            )}
                                         </motion.div>
                                     );
                                 })}
@@ -278,7 +276,7 @@ export default function InputFormModal({ isOpen, onClose, resumeData, setResumeD
                                                 w-10 sm:w-12 h-10 sm:h-12 rounded-full flex items-center justify-center transition-all duration-300
                                                 ${isActive ? 'bg-white text-blue-600 shadow-lg scale-110' :
                                                     isCompleted ? 'bg-green-500 text-white' :
-                                                        'bg-white bg-opacity-20 text-white'}
+                                                        'bg-white bg-opacity-20 text-gray-400'}
                                             `}>
                                                 {isCompleted ? <FaCheckCircle /> : <Icon />}
                                             </div>
@@ -288,20 +286,15 @@ export default function InputFormModal({ isOpen, onClose, resumeData, setResumeD
                                         </motion.div>
                                     );
                                 })}
-                                {/* Connection lines */}
-                                <div className="absolute top-5 sm:top-6 left-0 right-0 h-0.5 bg-white bg-opacity-30 -z-10"></div>
-                                <div
-                                    className="absolute top-5 sm:top-6 left-0 h-0.5 bg-green-400 transition-all duration-500 -z-10"
-                                    style={{ width: `${((currentStep - 1) / (totalSteps - 1)) * 100}%` }}
-                                ></div>
                             </div>
                         </div>
 
                         {/* Progress Bar */}
-                        <div className="mt-4 sm:mt-6 w-full bg-white bg-opacity-20 rounded-full h-1 sm:h-2">
+                        <div className="mt-4 sm:mt-6 w-full bg-white bg-opacity-30 rounded-full h-2 sm:h-3 shadow-inner">
                             <motion.div
-                                className="bg-white h-1 sm:h-2 rounded-full"
-                                initial={{ width: 0 }}
+                                key={`progress-${currentStep}`}
+                                className="bg-gradient-to-r from-green-400 to-green-500 h-2 sm:h-3 rounded-full shadow-sm"
+                                initial={{ width: `${((currentStep - 1) / totalSteps) * 100}%` }}
                                 animate={{ width: `${(currentStep / totalSteps) * 100}%` }}
                                 transition={{ duration: 0.5, ease: "easeInOut" }}
                             />
@@ -314,10 +307,16 @@ export default function InputFormModal({ isOpen, onClose, resumeData, setResumeD
                     <AnimatePresence mode="wait">
                         <motion.div
                             key={currentStep}
-                            initial={{ opacity: 0, x: 0 }}
+                            initial={{
+                                opacity: 0,
+                                x: directionRef.current * 50
+                            }}
                             animate={{ opacity: 1, x: 0 }}
-                            exit={{ opacity: 0, x: 0 }}
-                            transition={{ duration: 0.3 }}
+                            exit={{
+                                opacity: 0,
+                                x: directionRef.current * -50
+                            }}
+                            transition={{ duration: 0.3, ease: "easeInOut" }}
                             className="p-3 sm:p-4 lg:p-6"
                         >
                             {currentStep === 1 && (

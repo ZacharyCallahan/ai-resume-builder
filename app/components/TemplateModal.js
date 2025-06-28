@@ -157,20 +157,20 @@ export default function TemplateModal({
                 animate={{ scale: 1, opacity: 1, y: 0 }}
                 exit={{ scale: 0.95, opacity: 0, y: 20 }}
                 transition={{ type: "spring", duration: 0.5 }}
-                className="bg-white rounded-xl sm:rounded-2xl lg:rounded-3xl shadow-2xl w-full max-w-sm sm:max-w-md md:max-w-5xl lg:max-w-6xl xl:max-w-7xl h-[95vh] sm:max-h-[95vh] overflow-hidden flex flex-col"
+                className="bg-white rounded-xl sm:rounded-2xl lg:rounded-3xl shadow-2xl w-full max-w-sm sm:max-w-md md:max-w-5xl lg:max-w-6xl xl:max-w-7xl h-[85vh] sm:h-[90vh] lg:max-h-[95vh] overflow-hidden flex flex-col"
             >
-                {/* Enhanced Header with Gradient */}
-                <div className="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 text-white p-3 sm:p-4 lg:p-6">
+                {/* Enhanced Header with Gradient - Compact on Mobile */}
+                <div className="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 text-white p-2 sm:p-4 lg:p-6">
                     <div className="flex justify-between items-center">
                         <div className="flex items-center space-x-2 sm:space-x-4">
-                            <div className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
-                                <FaLayerGroup className="text-lg sm:text-xl lg:text-2xl" />
+                            <div className="w-6 h-6 sm:w-10 sm:h-10 lg:w-12 lg:h-12 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                                <FaLayerGroup className="text-sm sm:text-xl lg:text-2xl" />
                             </div>
                             <div>
                                 <motion.h2
                                     initial={{ opacity: 0, x: -20 }}
                                     animate={{ opacity: 1, x: 0 }}
-                                    className="text-lg sm:text-xl lg:text-2xl font-bold"
+                                    className="text-base sm:text-xl lg:text-2xl font-bold"
                                 >
                                     Choose Your Template
                                 </motion.h2>
@@ -178,36 +178,36 @@ export default function TemplateModal({
                                     initial={{ opacity: 0, x: -20 }}
                                     animate={{ opacity: 1, x: 0 }}
                                     transition={{ delay: 0.1 }}
-                                    className="text-blue-100 text-xs sm:text-sm"
+                                    className="text-blue-100 text-xs sm:text-sm hidden sm:block"
                                 >
                                     Select from our professionally designed resume templates
                                 </motion.p>
                             </div>
                         </div>
-                        <div className="flex items-center space-x-2">
+                        <div className="flex items-center space-x-1 sm:space-x-2">
                             {/* Mobile Customization Toggle */}
                             <button
                                 onClick={() => setShowCustomizationPanel(!showCustomizationPanel)}
-                                className="lg:hidden text-white hover:bg-white hover:bg-opacity-20 p-2 rounded-full transition-all duration-200"
+                                className="lg:hidden text-white hover:bg-white hover:bg-opacity-20 p-1.5 sm:p-2 rounded-full transition-all duration-200"
                             >
-                                <FaPalette size={16} />
+                                <FaPalette size={14} className="sm:text-base" />
                             </button>
 
                             <button
                                 onClick={onClose}
-                                className="text-white hover:bg-white hover:bg-opacity-20 p-2 sm:p-3 rounded-full transition-all duration-200"
+                                className="text-white hover:bg-white hover:bg-opacity-20 p-1.5 sm:p-3 rounded-full transition-all duration-200"
                             >
-                                <FaTimes size={16} className="sm:w-5 sm:h-5" />
+                                <FaTimes size={14} className="sm:w-5 sm:h-5" />
                             </button>
                         </div>
                     </div>
 
-                    {/* Stats - Responsive */}
+                    {/* Stats - Responsive - Hidden on Small Mobile */}
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.2 }}
-                        className="mt-3 sm:mt-4 lg:mt-6 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6 lg:gap-8 text-blue-100"
+                        className="mt-2 sm:mt-4 lg:mt-6 hidden sm:flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6 lg:gap-8 text-blue-100"
                     >
                         <div className="flex items-center space-x-2">
                             <FaStar className="text-yellow-300" />
@@ -228,7 +228,7 @@ export default function TemplateModal({
                     {/* Template Selection */}
                     <div className="flex-1 flex flex-col min-h-0">
                         {/* Enhanced Search and Filter Bar - Responsive */}
-                        <div className="p-3 sm:p-4 lg:p-6 border-b bg-gradient-to-r from-gray-50 to-white flex-shrink-0">
+                        <div className="p-2 sm:p-4 lg:p-6 border-b bg-gradient-to-r from-gray-50 to-white flex-shrink-0">
                             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-stretch sm:items-center">
                                 {/* Search */}
                                 <motion.div
@@ -276,109 +276,111 @@ export default function TemplateModal({
                             </div>
                         </div>
 
-                        {/* Enhanced Templates Grid - Responsive with proper mobile height */}
-                        <div className="flex-1 min-h-0 p-3 sm:p-4 lg:p-8 overflow-y-auto bg-gradient-to-br from-gray-50 to-white">
-                            {filteredTemplates.length === 0 ? (
-                                <motion.div
-                                    initial={{ opacity: 0, scale: 0.9 }}
-                                    animate={{ opacity: 1, scale: 1 }}
-                                    className="text-center py-8 sm:py-16"
-                                >
-                                    <div className="text-4xl sm:text-6xl mb-4">🔍</div>
-                                    <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2">No templates found</h3>
-                                    <p className="text-sm sm:text-base text-gray-600">Try adjusting your search or filter criteria</p>
-                                </motion.div>
-                            ) : (
-                                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3 sm:gap-4 lg:gap-6 pb-4 lg:pb-0">
-                                    {filteredTemplates.map((template, index) => {
-                                        const Icon = template.icon;
-                                        const isSelected = selectedTemplate === template.id;
+                        {/* Enhanced Templates Grid - Responsive with proper mobile height and scroll fix */}
+                        <div className="flex-1 min-h-0 overflow-y-auto bg-gradient-to-br from-gray-50 to-white">
+                            <div className="p-2 sm:p-4 lg:p-8 pt-3 sm:pt-4 lg:pt-8">
+                                {filteredTemplates.length === 0 ? (
+                                    <motion.div
+                                        initial={{ opacity: 0, scale: 0.9 }}
+                                        animate={{ opacity: 1, scale: 1 }}
+                                        className="text-center py-8 sm:py-16"
+                                    >
+                                        <div className="text-4xl sm:text-6xl mb-4">🔍</div>
+                                        <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2">No templates found</h3>
+                                        <p className="text-sm sm:text-base text-gray-600">Try adjusting your search or filter criteria</p>
+                                    </motion.div>
+                                ) : (
+                                    <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-2 sm:gap-4 lg:gap-6 pb-4 lg:pb-0">
+                                        {filteredTemplates.map((template, index) => {
+                                            const Icon = template.icon;
+                                            const isSelected = selectedTemplate === template.id;
 
-                                        return (
-                                            <motion.div
-                                                key={template.id}
-                                                initial={{ opacity: 0, y: 20 }}
-                                                animate={{ opacity: 1, y: 0 }}
-                                                transition={{ delay: index * 0.1 + 0.5 }}
-                                                whileHover={{ y: -4, scale: 1.02 }}
-                                                whileTap={{ scale: 0.98 }}
-                                                className={`relative bg-white border-2 rounded-lg sm:rounded-xl lg:rounded-2xl overflow-hidden cursor-pointer transition-all duration-300 ${isSelected
-                                                    ? 'border-blue-500 shadow-xl sm:shadow-2xl ring-2 sm:ring-4 ring-blue-100'
-                                                    : 'border-gray-200 hover:border-gray-300 hover:shadow-lg sm:hover:shadow-xl'
-                                                    }`}
-                                                onClick={() => handleTemplateSelect(template.id)}
-                                            >
-                                                {/* Popular Badge */}
-                                                {template.popular && (
-                                                    <motion.div
-                                                        initial={{ scale: 0 }}
-                                                        animate={{ scale: 1 }}
-                                                        transition={{ delay: index * 0.1 + 0.7 }}
-                                                        className="absolute top-2 sm:top-4 right-2 sm:right-4 z-10 bg-gradient-to-r from-orange-400 to-orange-500 text-white text-xs font-bold px-2 sm:px-3 py-1 rounded-full shadow-lg flex items-center space-x-1"
-                                                    >
-                                                        <FaStar className="text-xs" />
-                                                        <span className="hidden sm:inline">Popular</span>
-                                                    </motion.div>
-                                                )}
-
-                                                {/* Selected Badge */}
-                                                {isSelected && (
-                                                    <motion.div
-                                                        initial={{ scale: 0 }}
-                                                        animate={{ scale: 1 }}
-                                                        transition={{ type: "spring", duration: 0.3 }}
-                                                        className="absolute top-2 sm:top-4 left-2 sm:left-4 z-10 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full p-2 sm:p-3 shadow-lg"
-                                                    >
-                                                        <FaCheck className="w-3 h-3 sm:w-4 sm:h-4" />
-                                                    </motion.div>
-                                                )}
-
-                                                {/* Template Preview */}
-                                                <div className="aspect-[3/4] bg-gradient-to-br from-gray-50 to-gray-100 border-b relative overflow-hidden">
-                                                    <TemplatePreview
-                                                        key={`${template.id}-${customization.accentColor}-${customization.fontFamily}`}
-                                                        templateId={template.id}
-                                                        customization={customization}
-                                                    />
-
-                                                    {/* Overlay for better visual */}
-                                                    <div className="absolute inset-0 bg-gradient-to-t from-black/5 to-transparent pointer-events-none" />
-                                                </div>
-
-                                                {/* Enhanced Template Info */}
-                                                <div className="p-3 sm:p-4 lg:p-6">
-                                                    <div className="flex items-center space-x-2 sm:space-x-3 mb-2 sm:mb-3">
-                                                        <div
-                                                            className="w-6 h-6 sm:w-8 sm:h-8 lg:w-10 lg:h-10 rounded-full flex items-center justify-center text-white"
-                                                            style={{ backgroundColor: template.color }}
+                                            return (
+                                                <motion.div
+                                                    key={template.id}
+                                                    initial={{ opacity: 0, y: 20 }}
+                                                    animate={{ opacity: 1, y: 0 }}
+                                                    transition={{ delay: index * 0.1 + 0.5 }}
+                                                    whileHover={{ y: -4, scale: 1.02 }}
+                                                    whileTap={{ scale: 0.98 }}
+                                                    className={`relative bg-white border-2 rounded-lg sm:rounded-xl lg:rounded-2xl overflow-hidden cursor-pointer transition-all duration-300 ${isSelected
+                                                        ? 'border-blue-500 shadow-xl sm:shadow-2xl ring-2 sm:ring-4 ring-blue-100'
+                                                        : 'border-gray-200 hover:border-gray-300 hover:shadow-lg sm:hover:shadow-xl'
+                                                        }`}
+                                                    onClick={() => handleTemplateSelect(template.id)}
+                                                >
+                                                    {/* Popular Badge - Smaller on Mobile */}
+                                                    {template.popular && (
+                                                        <motion.div
+                                                            initial={{ scale: 0 }}
+                                                            animate={{ scale: 1 }}
+                                                            transition={{ delay: index * 0.1 + 0.7 }}
+                                                            className="absolute top-1 sm:top-4 right-1 sm:right-4 z-10 bg-gradient-to-r from-orange-400 to-orange-500 text-white text-xs font-bold px-1.5 sm:px-3 py-0.5 sm:py-1 rounded-full shadow-lg flex items-center space-x-1"
                                                         >
-                                                            <Icon className="text-xs sm:text-sm" />
-                                                        </div>
-                                                        <div className="min-w-0 flex-1">
-                                                            <h4 className="font-bold text-gray-900 text-sm sm:text-base lg:text-lg truncate">{template.name}</h4>
-                                                            <div className="text-xs text-gray-500 capitalize">{template.category}</div>
-                                                        </div>
+                                                            <FaStar className="text-xs" />
+                                                            <span className="hidden sm:inline">Popular</span>
+                                                        </motion.div>
+                                                    )}
+
+                                                    {/* Selected Badge - Smaller on Mobile */}
+                                                    {isSelected && (
+                                                        <motion.div
+                                                            initial={{ scale: 0 }}
+                                                            animate={{ scale: 1 }}
+                                                            transition={{ type: "spring", duration: 0.3 }}
+                                                            className="absolute top-1 sm:top-4 left-1 sm:left-4 z-10 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full p-1.5 sm:p-3 shadow-lg"
+                                                        >
+                                                            <FaCheck className="w-2.5 h-2.5 sm:w-4 sm:h-4" />
+                                                        </motion.div>
+                                                    )}
+
+                                                    {/* Template Preview - More compact on mobile */}
+                                                    <div className="aspect-[4/3] sm:aspect-[3/4] bg-gradient-to-br from-gray-50 to-gray-100 border-b relative overflow-hidden">
+                                                        <TemplatePreview
+                                                            key={`${template.id}-${customization.accentColor}-${customization.fontFamily}`}
+                                                            templateId={template.id}
+                                                            customization={customization}
+                                                        />
+
+                                                        {/* Overlay for better visual */}
+                                                        <div className="absolute inset-0 bg-gradient-to-t from-black/5 to-transparent pointer-events-none" />
                                                     </div>
 
-                                                    <p className="text-xs sm:text-sm text-gray-600 mb-3 sm:mb-4 leading-relaxed line-clamp-2">{template.description}</p>
-
-                                                    {/* Enhanced Tags */}
-                                                    <div className="flex flex-wrap gap-1 sm:gap-2">
-                                                        {template.tags.slice(0, 3).map((tag) => (
-                                                            <span
-                                                                key={tag}
-                                                                className="inline-block bg-gray-100 text-gray-700 text-xs px-2 sm:px-3 py-1 rounded-full font-medium"
+                                                    {/* Enhanced Template Info - Compact on Mobile */}
+                                                    <div className="p-2 sm:p-4 lg:p-6">
+                                                        <div className="flex items-center space-x-1.5 sm:space-x-3 mb-1.5 sm:mb-3">
+                                                            <div
+                                                                className="w-5 h-5 sm:w-8 sm:h-8 lg:w-10 lg:h-10 rounded-full flex items-center justify-center text-white"
+                                                                style={{ backgroundColor: template.color }}
                                                             >
-                                                                {tag}
-                                                            </span>
-                                                        ))}
+                                                                <Icon className="text-xs sm:text-sm" />
+                                                            </div>
+                                                            <div className="min-w-0 flex-1">
+                                                                <h4 className="font-bold text-gray-900 text-xs sm:text-base lg:text-lg truncate">{template.name}</h4>
+                                                                <div className="text-xs text-gray-500 capitalize hidden sm:block">{template.category}</div>
+                                                            </div>
+                                                        </div>
+
+                                                        <p className="text-xs sm:text-sm text-gray-600 mb-2 sm:mb-4 leading-relaxed line-clamp-2 hidden sm:block">{template.description}</p>
+
+                                                        {/* Enhanced Tags - Only show on larger screens */}
+                                                        <div className="hidden sm:flex flex-wrap gap-1 sm:gap-2">
+                                                            {template.tags.slice(0, 3).map((tag) => (
+                                                                <span
+                                                                    key={tag}
+                                                                    className="inline-block bg-gray-100 text-gray-700 text-xs px-2 sm:px-3 py-1 rounded-full font-medium"
+                                                                >
+                                                                    {tag}
+                                                                </span>
+                                                            ))}
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </motion.div>
-                                        );
-                                    })}
-                                </div>
-                            )}
+                                                </motion.div>
+                                            );
+                                        })}
+                                    </div>
+                                )}
+                            </div>
                         </div>
                     </div>
 
@@ -482,7 +484,7 @@ export default function TemplateModal({
                 </div>
 
                 {/* Enhanced Footer - Responsive */}
-                <div className="flex flex-col sm:flex-row justify-between items-center p-3 sm:p-4 lg:p-6 border-t bg-gradient-to-r from-gray-50 to-white space-y-3 sm:space-y-0 flex-shrink-0">
+                <div className="flex flex-col sm:flex-row justify-between items-center p-2 sm:p-4 lg:p-6 border-t bg-gradient-to-r from-gray-50 to-white space-y-2 sm:space-y-0 flex-shrink-0">
                     <motion.button
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
