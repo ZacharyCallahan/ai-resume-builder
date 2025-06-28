@@ -195,7 +195,7 @@ export default function InputFormModal({ isOpen, onClose, resumeData, setResumeD
                             <motion.h2
                                 initial={{ opacity: 0, x: -20 }}
                                 animate={{ opacity: 1, x: 0 }}
-                                className="text-3xl font-bold"
+                                className="text-2xl font-bold"
                             >
                                 Build Your Resume
                             </motion.h2>
@@ -203,7 +203,7 @@ export default function InputFormModal({ isOpen, onClose, resumeData, setResumeD
                                 initial={{ opacity: 0, x: -20 }}
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ delay: 0.1 }}
-                                className="text-blue-100 mt-1"
+                                className="text-blue-100 mt-1 text-sm"
                             >
                                 Step {currentStep} of {totalSteps}: {stepIcons[currentStep - 1].label}
                             </motion.p>
@@ -271,11 +271,11 @@ export default function InputFormModal({ isOpen, onClose, resumeData, setResumeD
                     <AnimatePresence mode="wait">
                         <motion.div
                             key={currentStep}
-                            initial={{ opacity: 0, x: 20 }}
+                            initial={{ opacity: 0, x: 0 }}
                             animate={{ opacity: 1, x: 0 }}
-                            exit={{ opacity: 0, x: -20 }}
+                            exit={{ opacity: 0, x: 0 }}
                             transition={{ duration: 0.3 }}
-                            className="p-8"
+                            className="p-6"
                         >
                             {currentStep === 1 && (
                                 <PersonalInfoStep
@@ -362,15 +362,15 @@ function PersonalInfoStep({ personalInfo, updatePersonalInfo, targetJobTitle, se
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.1 }}
-                    className="text-3xl font-bold text-gray-900 mb-2"
+                    className="text-xl font-bold text-gray-900 mb-2"
                 >
-                    Let's Start With You
+                    Let&apos;s Start With You
                 </motion.h3>
                 <motion.p
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.2 }}
-                    className="text-gray-600"
+                    className="text-gray-600 text-sm"
                 >
                     Tell us about yourself so we can create your perfect resume
                 </motion.p>
@@ -732,7 +732,7 @@ function EducationSkillsStep({ education, addEducation, updateEducation, removeE
                                         value={edu.degree}
                                         onChange={(e) => updateEducation(edu.id, 'degree', e.target.value)}
                                         className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200"
-                                        placeholder="Bachelor's, Master's, PhD, etc."
+                                        placeholder="Bachelor&apos;s, Master&apos;s, PhD, etc."
                                     />
                                 </div>
 
@@ -943,7 +943,7 @@ function AIGenerationStep({ existingResume, setExistingResume, customInstruction
 • Increased team productivity by 25% through process improvements
 • Managed $2M annual budget across 3 departments  
 • Led team of 8 developers on critical product launch
-• Received 'Employee of the Year' award in 2023
+• Received &quot;Employee of the Year&quot; award in 2023
 • Focus on leadership and project management skills
 • Include keywords: Agile, Scrum, stakeholder management..."
                     />

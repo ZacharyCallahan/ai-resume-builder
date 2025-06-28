@@ -96,7 +96,7 @@ export default function PreviewModal({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 flex items-center justify-center z-50 p-4"
+            className="fixed inset-0 flex items-center justify-center z-50 p-4 overflow-hidden"
             style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}
             onClick={(e) => e.target === e.currentTarget && onClose()}
         >
@@ -105,7 +105,7 @@ export default function PreviewModal({
                 animate={{ scale: 1, opacity: 1, y: 0 }}
                 exit={{ scale: 0.95, opacity: 0, y: 20 }}
                 transition={{ type: "spring", duration: 0.5 }}
-                className="bg-white rounded-3xl shadow-2xl w-full max-w-7xl max-h-[95vh] flex flex-col overflow-hidden"
+                className="bg-white rounded-2xl shadow-2xl w-full max-w-6xl max-h-[95vh] flex flex-col overflow-hidden"
             >
                 {/* Enhanced Header with Gradient */}
                 <div className="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 text-white p-6">
@@ -118,7 +118,7 @@ export default function PreviewModal({
                                 <motion.h2
                                     initial={{ opacity: 0, x: -20 }}
                                     animate={{ opacity: 1, x: 0 }}
-                                    className="text-3xl font-bold"
+                                    className="text-2xl font-bold"
                                 >
                                     Resume Preview
                                 </motion.h2>
@@ -126,7 +126,7 @@ export default function PreviewModal({
                                     initial={{ opacity: 0, x: -20 }}
                                     animate={{ opacity: 1, x: 0 }}
                                     transition={{ delay: 0.1 }}
-                                    className="text-blue-100 flex items-center space-x-2"
+                                    className="text-blue-100 flex items-center space-x-2 text-sm"
                                 >
                                     <FaFileAlt className="text-sm" />
                                     <span>Template: {selectedTemplate?.charAt(0).toUpperCase() + selectedTemplate?.slice(1)}</span>

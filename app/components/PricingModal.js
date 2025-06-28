@@ -125,7 +125,7 @@ export default function PricingModal({ isOpen, onClose }) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 flex items-center justify-center z-50 p-4"
+            className="fixed inset-0 flex items-center justify-center z-50 p-4 overflow-hidden"
             style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}
             onClick={(e) => e.target === e.currentTarget && onClose()}
         >
@@ -134,16 +134,16 @@ export default function PricingModal({ isOpen, onClose }) {
                 animate={{ scale: 1, opacity: 1, y: 0 }}
                 exit={{ scale: 0.95, opacity: 0, y: 20 }}
                 transition={{ type: "spring", duration: 0.5 }}
-                className="bg-white rounded-3xl shadow-2xl w-full max-w-7xl max-h-[95vh] overflow-hidden"
+                className="bg-white rounded-3xl shadow-2xl w-full max-w-6xl max-h-[95vh] overflow-hidden"
             >
                 {/* Header with Gradient */}
-                <div className="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 text-white p-8">
+                <div className="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 text-white p-6">
                     <div className="flex justify-between items-center">
                         <div>
                             <motion.h2
                                 initial={{ opacity: 0, x: -20 }}
                                 animate={{ opacity: 1, x: 0 }}
-                                className="text-4xl font-bold mb-2"
+                                className="text-2xl font-bold mb-1"
                             >
                                 Choose Your Plan
                             </motion.h2>
@@ -151,16 +151,16 @@ export default function PricingModal({ isOpen, onClose }) {
                                 initial={{ opacity: 0, x: -20 }}
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ delay: 0.1 }}
-                                className="text-blue-100 text-lg"
+                                className="text-blue-100 text-sm"
                             >
                                 Unlock the full power of AI resume building
                             </motion.p>
                         </div>
                         <button
                             onClick={onClose}
-                            className="text-white hover:bg-white hover:bg-opacity-20 p-3 rounded-full transition-all duration-200"
+                            className="text-white hover:bg-white hover:bg-opacity-20 p-2 rounded-full transition-all duration-200"
                         >
-                            <FaTimes size={24} />
+                            <FaTimes size={20} />
                         </button>
                     </div>
 
@@ -169,19 +169,19 @@ export default function PricingModal({ isOpen, onClose }) {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.2 }}
-                        className="mt-8 flex flex-wrap items-center justify-center gap-8 text-blue-100"
+                        className="mt-4 flex flex-wrap items-center justify-center gap-6 text-blue-100"
                     >
                         <div className="flex items-center space-x-2">
                             <FaShieldAlt className="text-green-400" />
-                            <span className="text-sm">30-Day Money Back Guarantee</span>
+                            <span className="text-xs">30-Day Money Back Guarantee</span>
                         </div>
                         <div className="flex items-center space-x-2">
                             <FaStar className="text-yellow-400" />
-                            <span className="text-sm">4.9/5 Average Rating</span>
+                            <span className="text-xs">4.9/5 Average Rating</span>
                         </div>
                         <div className="flex items-center space-x-2">
                             <span className="text-green-400">✓</span>
-                            <span className="text-sm">50,000+ Resumes Created</span>
+                            <span className="text-xs">50,000+ Resumes Created</span>
                         </div>
                     </motion.div>
                 </div>
@@ -189,8 +189,8 @@ export default function PricingModal({ isOpen, onClose }) {
                 {/* Content Area */}
                 <div className="overflow-y-auto max-h-[70vh] bg-gradient-to-br from-gray-50 to-white">
                     {/* Pricing Cards */}
-                    <div className="p-8">
-                        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <div className="p-6">
+                        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                             {plans.map((plan, index) => {
                                 const Icon = plan.icon;
                                 const isPopular = plan.popular;
@@ -198,179 +198,164 @@ export default function PricingModal({ isOpen, onClose }) {
                                 return (
                                     <motion.div
                                         key={plan.name}
-                                        initial={{ opacity: 0, y: 30 }}
+                                        initial={{ opacity: 0, y: 20 }}
                                         animate={{ opacity: 1, y: 0 }}
                                         transition={{ delay: index * 0.1 + 0.3 }}
-                                        className={`relative rounded-2xl border-2 p-8 transition-all duration-300 hover:shadow-2xl ${isPopular
-                                            ? 'border-blue-500 shadow-2xl scale-105 bg-gradient-to-br from-blue-50 to-purple-50'
-                                            : 'border-gray-200 bg-white hover:border-gray-300'
+                                        className={`relative bg-white rounded-2xl border-2 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden ${isPopular ? 'border-blue-500 ring-2 ring-blue-100 scale-105' : 'border-gray-200'
                                             }`}
                                     >
+                                        {/* Popular Badge */}
                                         {isPopular && (
-                                            <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                                                <motion.span
-                                                    initial={{ scale: 0 }}
-                                                    animate={{ scale: 1 }}
-                                                    transition={{ delay: 0.5, type: "spring" }}
-                                                    className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-full text-sm font-bold shadow-lg flex items-center space-x-2"
-                                                >
-                                                    <FaStar className="text-yellow-300" />
-                                                    <span>Most Popular</span>
-                                                </motion.span>
+                                            <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
+                                                <div className="bg-gradient-to-r from-orange-400 to-orange-500 text-white text-xs font-bold px-4 py-1 rounded-full shadow-lg">
+                                                    Most Popular
+                                                </div>
                                             </div>
                                         )}
 
-                                        <div className="text-center mb-8">
-                                            <div className={`w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center ${isPopular ? 'bg-gradient-to-r from-blue-600 to-purple-600' : 'bg-gray-100'}`}>
-                                                <Icon className={`text-2xl ${isPopular ? 'text-white' : 'text-gray-600'}`} />
+                                        <div className="p-5">
+                                            {/* Plan Header */}
+                                            <div className="text-center mb-4">
+                                                <div className={`w-12 h-12 mx-auto mb-3 rounded-full flex items-center justify-center ${plan.color === 'blue' ? 'bg-blue-100 text-blue-600' :
+                                                    plan.color === 'purple' ? 'bg-purple-100 text-purple-600' :
+                                                        'bg-gray-100 text-gray-600'
+                                                    }`}>
+                                                    <Icon className="text-lg" />
+                                                </div>
+                                                <h3 className="text-lg font-bold text-gray-900">{plan.name}</h3>
+                                                <p className="text-xs text-gray-600 mt-1">{plan.description}</p>
                                             </div>
 
-                                            <h3 className="text-2xl font-bold text-gray-900 mb-2">{plan.name}</h3>
-                                            <div className="mb-4">
-                                                <span className="text-5xl font-bold text-gray-900">{plan.price}</span>
-                                                <span className="text-gray-600 ml-2">/ {plan.period}</span>
+                                            {/* Pricing */}
+                                            <div className="text-center mb-4">
+                                                <div className="flex items-baseline justify-center">
+                                                    <span className="text-2xl font-bold text-gray-900">{plan.price}</span>
+                                                    <span className="text-sm text-gray-600 ml-1">/{plan.period}</span>
+                                                </div>
                                             </div>
-                                            <p className="text-gray-600 leading-relaxed">{plan.description}</p>
-                                        </div>
 
-                                        <div className="space-y-4 mb-8">
-                                            {plan.features.map((feature, featureIndex) => (
-                                                <motion.div
-                                                    key={featureIndex}
-                                                    initial={{ opacity: 0, x: -10 }}
-                                                    animate={{ opacity: 1, x: 0 }}
-                                                    transition={{ delay: index * 0.1 + featureIndex * 0.05 + 0.5 }}
-                                                    className="flex items-start space-x-3"
-                                                >
-                                                    <div className="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center mt-0.5">
-                                                        <FaCheck className="text-white text-xs" />
+                                            {/* Features */}
+                                            <div className="space-y-2 mb-4">
+                                                {plan.features.map((feature, featureIndex) => (
+                                                    <div key={featureIndex} className="flex items-center text-xs">
+                                                        <FaCheck className="text-green-500 mr-2 flex-shrink-0" />
+                                                        <span className="text-gray-700">{feature}</span>
                                                     </div>
-                                                    <span className="text-gray-700 leading-relaxed">{feature}</span>
-                                                </motion.div>
-                                            ))}
-                                            {plan.limitations.map((limitation, limitationIndex) => (
-                                                <motion.div
-                                                    key={limitationIndex}
-                                                    initial={{ opacity: 0, x: -10 }}
-                                                    animate={{ opacity: 1, x: 0 }}
-                                                    transition={{ delay: index * 0.1 + (plan.features.length + limitationIndex) * 0.05 + 0.5 }}
-                                                    className="flex items-start space-x-3"
-                                                >
-                                                    <div className="w-5 h-5 bg-red-500 rounded-full flex items-center justify-center mt-0.5">
-                                                        <FaTimes className="text-white text-xs" />
-                                                    </div>
-                                                    <span className="text-gray-500 leading-relaxed">{limitation}</span>
-                                                </motion.div>
-                                            ))}
-                                        </div>
+                                                ))}
+                                            </div>
 
-                                        <button
-                                            onClick={() => {
-                                                // Future: Integrate with Stripe
-                                                alert('Payment integration coming soon!');
-                                            }}
-                                            className={`w-full py-4 px-6 rounded-xl font-bold text-lg transition-all duration-300 transform hover:scale-105 ${isPopular
-                                                ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:from-blue-700 hover:to-purple-700 shadow-lg hover:shadow-xl'
-                                                : 'bg-gray-100 text-gray-900 hover:bg-gray-200 border-2 border-gray-200 hover:border-gray-300'
-                                                }`}
-                                        >
-                                            {plan.buttonText}
-                                        </button>
+                                            {/* Limitations */}
+                                            {plan.limitations.length > 0 && (
+                                                <div className="space-y-2 mb-4 pb-4 border-b border-gray-100">
+                                                    {plan.limitations.map((limitation, limitationIndex) => (
+                                                        <div key={limitationIndex} className="flex items-center text-xs">
+                                                            <span className="text-red-500 mr-2">✕</span>
+                                                            <span className="text-gray-500">{limitation}</span>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            )}
+
+                                            {/* CTA Button */}
+                                            <button
+                                                className={`w-full py-2 px-4 rounded-xl font-medium transition-all duration-200 ${isPopular
+                                                    ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:from-blue-700 hover:to-purple-700 shadow-lg hover:shadow-xl transform hover:scale-105'
+                                                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                                                    }`}
+                                            >
+                                                {plan.buttonText}
+                                            </button>
+                                        </div>
                                     </motion.div>
                                 );
                             })}
                         </div>
                     </div>
 
-                    {/* Testimonials */}
-                    <div className="bg-gradient-to-r from-blue-50 to-purple-50 py-16">
-                        <div className="max-w-6xl mx-auto px-8">
-                            <motion.h3
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: 0.8 }}
-                                className="text-3xl font-bold text-gray-900 text-center mb-12"
-                            >
-                                What Our Users Say
-                            </motion.h3>
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                                {testimonials.map((testimonial, index) => (
-                                    <motion.div
-                                        key={index}
-                                        initial={{ opacity: 0, y: 30 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        transition={{ delay: index * 0.1 + 0.9 }}
-                                        className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300"
-                                    >
-                                        <div className="flex items-center space-x-4 mb-4">
-                                            <div className="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center text-white font-bold">
-                                                {testimonial.avatar}
-                                            </div>
-                                            <div>
-                                                <h4 className="font-semibold text-gray-900">{testimonial.name}</h4>
-                                                <p className="text-sm text-gray-600">{testimonial.role} at {testimonial.company}</p>
-                                            </div>
+                    {/* Testimonials Section */}
+                    <div className="px-6 py-4 bg-white">
+                        <motion.h3
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.6 }}
+                            className="text-lg font-bold text-center text-gray-900 mb-4"
+                        >
+                            What Our Users Say
+                        </motion.h3>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            {testimonials.map((testimonial, index) => (
+                                <motion.div
+                                    key={index}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ delay: 0.7 + index * 0.1 }}
+                                    className="bg-gray-50 rounded-xl p-4 border border-gray-100"
+                                >
+                                    <div className="flex items-center mb-2">
+                                        <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center text-white text-xs font-bold mr-3">
+                                            {testimonial.avatar}
                                         </div>
-                                        <p className="text-gray-700 leading-relaxed italic">&quot;{testimonial.testimonial}&quot;</p>
-                                        <div className="flex mt-4">
-                                            {[...Array(5)].map((_, i) => (
-                                                <FaStar key={i} className="text-yellow-400" />
-                                            ))}
+                                        <div>
+                                            <div className="font-semibold text-sm text-gray-900">{testimonial.name}</div>
+                                            <div className="text-xs text-gray-600">{testimonial.role} at {testimonial.company}</div>
                                         </div>
-                                    </motion.div>
-                                ))}
-                            </div>
+                                    </div>
+                                    <p className="text-xs text-gray-700 italic">"{testimonial.testimonial}"</p>
+                                    <div className="flex text-yellow-400 mt-2">
+                                        {[...Array(5)].map((_, i) => (
+                                            <FaStar key={i} className="text-xs" />
+                                        ))}
+                                    </div>
+                                </motion.div>
+                            ))}
                         </div>
                     </div>
 
                     {/* FAQ Section */}
-                    <div className="py-16 px-8">
+                    <div className="px-6 py-4 bg-gradient-to-r from-gray-50 to-white">
                         <motion.h3
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 1.2 }}
-                            className="text-3xl font-bold text-gray-900 text-center mb-12"
+                            transition={{ delay: 1.0 }}
+                            className="text-lg font-bold text-center text-gray-900 mb-4"
                         >
                             Frequently Asked Questions
                         </motion.h3>
-                        <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl mx-auto">
                             {faqs.map((faq, index) => (
                                 <motion.div
                                     key={index}
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
-                                    transition={{ delay: index * 0.1 + 1.3 }}
-                                    className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300"
+                                    transition={{ delay: 1.1 + index * 0.1 }}
+                                    className="bg-white rounded-xl p-4 shadow-sm border border-gray-100"
                                 >
-                                    <h4 className="font-bold text-gray-900 mb-3 text-lg">
-                                        {faq.question}
-                                    </h4>
-                                    <p className="text-gray-600 leading-relaxed">
-                                        {faq.answer}
-                                    </p>
+                                    <h4 className="font-semibold text-sm text-gray-900 mb-2">{faq.question}</h4>
+                                    <p className="text-xs text-gray-600 leading-relaxed">{faq.answer}</p>
                                 </motion.div>
                             ))}
                         </div>
                     </div>
-                </div>
 
-                {/* Footer */}
-                <div className="flex justify-center items-center p-6 border-t bg-white">
-                    <motion.p
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 1.5 }}
-                        className="text-gray-500 text-sm flex items-center space-x-4"
-                    >
-                        <span className="flex items-center space-x-2">
-                            <FaShieldAlt className="text-green-500" />
-                            <span>Secure payment processing</span>
-                        </span>
-                        <span>•</span>
-                        <span>30-day money-back guarantee</span>
-                        <span>•</span>
-                        <span>No hidden fees</span>
-                    </motion.p>
+                    {/* Trust & Security Footer */}
+                    <div className="px-6 py-4 bg-gradient-to-r from-blue-50 to-purple-50 border-t">
+                        <div className="text-center">
+                            <div className="flex justify-center items-center space-x-6 text-gray-600 text-xs">
+                                <span className="flex items-center space-x-2">
+                                    <FaShieldAlt className="text-green-500" />
+                                    <span>Secure payment processing</span>
+                                </span>
+                                <span className="flex items-center space-x-2">
+                                    <FaCheck className="text-green-500" />
+                                    <span>No hidden fees</span>
+                                </span>
+                                <span className="flex items-center space-x-2">
+                                    <FaStar className="text-yellow-500" />
+                                    <span>30-day guarantee</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </motion.div>
         </motion.div>
