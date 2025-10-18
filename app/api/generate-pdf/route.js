@@ -1,5 +1,27 @@
+import chromium from '@sparticuz/chromium';
 import { NextResponse } from 'next/server';
-import puppeteer from 'puppeteer';
+
+const isProduction = process.env.NODE_ENV === 'production';
+
+async function launchBrowser() {
+  if (isProduction) {
+    const puppeteer = await import('puppeteer-core');
+
+    return puppeteer.launch({
+      args: chromium.args,
+      defaultViewport: chromium.defaultViewport,
+      executablePath: await chromium.executablePath(),
+      headless: chromium.headless,
+    });
+  }
+
+  const puppeteer = await import('puppeteer');
+
+  return puppeteer.launch({
+    headless: true,
+    args: ['--no-sandbox', '--disable-setuid-sandbox'],
+  });
+}
 
 function getPDFMargins(template, customMargins) {
   // Use custom margins if provided
@@ -55,10 +77,7 @@ export async function POST(request) {
     const html = generateResumeHTML(resumeData, aiGeneratedContent, selectedTemplate, customization);
 
     // Launch Puppeteer
-    const browser = await puppeteer.launch({
-      headless: true,
-      args: ['--no-sandbox', '--disable-setuid-sandbox'],
-    });
+    const browser = await launchBrowser();
 
     const page = await browser.newPage();
 
